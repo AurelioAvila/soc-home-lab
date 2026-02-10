@@ -1,5 +1,5 @@
 # SOC Home Lab — SIEM Monitoring, Detection Engineering & Alert Triage
-
+A hands-on portfolio project focused on SOC Tier 1 workflows, alert triage and decision-making.
 ## Why this project exists
 Reading about SOC operations is easy. Demonstrating practical understanding is not.
 This repository exists to show how I approach **real SOC Tier 1 activities**, including:
