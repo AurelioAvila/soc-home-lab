@@ -123,7 +123,8 @@ During the build of this lab, multiple real-world problems were encountered and 
 
 The complete troubleshooting and validation process is documented here:
 
-👉 **Log Ingestion & Validation Troubleshooting**
+👉 [Log Ingestion & Validation Troubleshooting](troubleshooting/ingestion-validation.md)
+
 
 ---
 
