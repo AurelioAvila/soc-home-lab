@@ -104,6 +104,22 @@ Planned next improvements:
 - additional endpoint scenarios for investigation practice
 
 ---
+## Troubleshooting & Validation
+
+Real SOC work is not about perfect setups, but about identifying and resolving ingestion and visibility issues.
+
+During the build of this lab, multiple real-world problems were encountered and resolved, including:
+
+- log ingestion verification from endpoints,
+- index visibility and data availability checks,
+- authentication and permission-related errors,
+- end-to-end data flow validation from source to SIEM.
+
+The complete troubleshooting and validation process is documented here:
+
+👉 [Log Ingestion & Validation Troubleshooting](./troubleshooting/ingestion-validation.md)
+
+---
 
 ## Disclaimer
 
