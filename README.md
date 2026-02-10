@@ -1,62 +1,111 @@
 # SOC Home Lab — SIEM Monitoring, Detection Engineering & Alert Triage
-A hands-on portfolio project focused on SOC Tier 1 workflows, alert triage and decision-making.
+
+A hands-on portfolio project focused on **SOC (Security Operations Center) Tier 1** workflows: log ingestion, alert triage, and investigation-driven decision making.
+
+---
+
 ## Why this project exists
-Reading about SOC operations is easy. Demonstrating practical understanding is not.
-This repository exists to show how I approach **real SOC Tier 1 activities**, including:
 
-- log ingestion and normalization,
-- detection of suspicious behavior,
-- alert triage with contextual analysis,
-- structured documentation of security events.
+Reading about SOC operations is easy. Demonstrating practical ability is not.
 
-The focus is on **process and reasoning**, not just tool installation.
+This repository exists to show how I approach **real SOC Tier 1 activities** with an emphasis on:
+- verifying data sources,
+- validating alerts end-to-end,
+- triaging events using context,
+- documenting findings clearly.
 
-## Scope of the lab
-This home lab simulates a small SOC environment focused on **host-based telemetry**
-and common attack patterns seen in entry-level SOC roles:
+The focus is on **process and reasoning**, not on “just installing tools”.
 
-- SSH brute force and password spraying attempts
-- Linux privilege escalation activity
-- Suspicious authentication behavior
+---
 
-## Lab stack
-- **Wazuh** as SIEM (Security Information and Event Management)
-- **Ubuntu Server** as monitored endpoint(s)
-- **VirtualBox** for virtualization
+## Architecture
 
-> Tooling may evolve as the lab grows. Any architectural or tooling change is
-explicitly documented in `lessons-learned.md`.
+This lab uses a realistic SOC-style architecture:
 
-## High-level architecture
-- A Wazuh manager collects and correlates events from enrolled agents.
-- Linux endpoints generate authentication and system logs.
-- Alerts are investigated, classified, and documented following a SOC-style workflow.
+- **Wazuh Manager (All-in-One)** on Ubuntu (Oracle VirtualBox)
+- **OpenSearch** for indexing and search
+- **OpenSearch Dashboards** for visualizing alerts and investigations
+- **Filebeat (Wazuh module)** for structured log ingestion
+- **Windows 11 endpoint** with **Wazuh Agent**
 
-Diagrams and details are available in the `architecture/` folder.
+This mirrors common entry-level SOC environments focused on host-based telemetry.
 
-## Detection and triage philosophy
-Each detection scenario in this repository includes:
-- threat context and attacker intent,
-- data sources and assumptions,
-- detection logic and known limitations,
-- alert triage steps used to confirm or dismiss the alert,
-- evidence collected during analysis.
+---
 
-The goal is to **think like a SOC analyst**, not to blindly trust alerts.
+## What is monitored
 
-## Repository structure
-- `setup/` — installation and configuration steps (reproducible)
-- `detection/` — detection logic, validation and tuning notes
-- `incident-response/` — alert triage playbooks and incident summaries
-- `screenshots/` — visual evidence of alerts and investigations
-- `lessons-learned.md` — mistakes, fixes and improvements over time
+The lab prioritizes **real endpoint telemetry** (not synthetic demo data), including:
 
-## Assumptions and verification
-This lab is built on commonly used configurations, but exact behavior can vary
-depending on:
-- Wazuh version,
-- Linux distribution and log paths,
-- available system resources.
+- Authentication activity (logon, sudo/PAM where applicable)
+- Privilege-related activity and suspicious access patterns
+- Host and process activity relevant to triage
+- Agent status and heartbeat monitoring
 
-Whenever a step is version-dependent or environment-specific, it is explicitly
-noted and validated with screenshots or command output.
+Alerts are enriched with:
+- **MITRE ATT&CK** mapping
+- Compliance metadata (e.g., PCI DSS, GDPR) when available in rule fields
+
+---
+
+## SOC activities performed
+
+This project demonstrates hands-on **SOC Tier 1** activities, including:
+
+- Endpoint onboarding (agent deployment, enrollment, connectivity checks)
+- Validation of ingestion and normalization (ensuring events land in the SIEM)
+- Alert triage using contextual fields (host, user, rule metadata, timestamps)
+- Investigation of authentication/privilege-related events
+- Troubleshooting ingestion and access issues (service status, permissions, authentication behavior)
+- Verification of OpenSearch indices and data flow into dashboards
+
+The emphasis is on understanding **why alerts are generated** and **how to validate them**, not merely enabling services.
+
+---
+
+## Tools and technologies
+
+- SOC (Security Operations Center) concepts and workflows
+- SIEM (Security Information and Event Management): **Wazuh**
+- HIDS (Host-based Intrusion Detection System): **Wazuh Agent**
+- OpenSearch + OpenSearch Dashboards
+- Filebeat (Wazuh module)
+- Linux (Ubuntu on VirtualBox)
+- Windows 11 endpoint
+- Oracle VirtualBox
+
+---
+
+## Design decisions
+
+Wazuh archives ingestion is handled through the **official Filebeat Wazuh module** rather than custom ingestion inputs to:
+- reduce configuration drift,
+- keep the deployment maintainable,
+- better reflect production-style SOC environments.
+
+---
+
+## Evidence (screenshots)
+
+Screenshots and artifacts will be stored under:
+- `screenshots/` (dashboards, agent status, alert examples)
+- `configs/` (sanitized configuration excerpts)
+
+> Note: Screenshots will not include credentials or sensitive host details.
+
+---
+
+## Project status
+
+Core monitoring, ingestion validation, and triage workflows are implemented and tested.
+
+Planned next improvements:
+- a small set of custom detection rules
+- documented triage write-ups (alert → analysis → conclusion)
+- additional endpoint scenarios for investigation practice
+
+---
+
+## Disclaimer
+
+This project is for educational and portfolio purposes only.  
+No production systems or real sensitive data are involved.
