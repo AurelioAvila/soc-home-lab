@@ -1,27 +1,29 @@
 # SOC Home Lab — SIEM Monitoring, Detection Engineering & Alert Triage
 
-A hands-on portfolio project focused on SOC (Security Operations Center) Tier 1 workflows: log ingestion, alert triage, and investigation-driven decision making.
+A hands-on portfolio project focused on real SOC (Security Operations Center) Tier 1 workflows:  
+log ingestion, alert validation, triage, and investigation-driven decision making.
 
 ---
 
-## Why this project exists
+## Project Objective
 
 Reading about SOC operations is easy. Demonstrating practical ability is not.
 
-This repository exists to show how I approach real SOC Tier 1 activities, with an emphasis on:
+This repository showcases how I approach real SOC Tier 1 activities, with emphasis on:
 
-- verifying data sources,
-- validating alerts end-to-end,
-- triaging events using context,
-- documenting findings clearly.
+- Verifying data sources and log ingestion
+- Validating alerts end-to-end
+- Performing structured alert triage
+- Investigating authentication and privilege-related events
+- Documenting findings clearly and methodically
 
-The focus is on **process and reasoning**, not on “just installing tools”.
+The focus is on process, reasoning, and validation — not just tool installation.
 
 ---
 
 ## Architecture
 
-This lab uses a realistic SOC-style architecture:
+This lab simulates a realistic SOC-style monitoring architecture:
 
 - **Wazuh Manager (All-in-One)** running on Ubuntu (Oracle VirtualBox)
 - **OpenSearch** for indexing and search
@@ -29,106 +31,135 @@ This lab uses a realistic SOC-style architecture:
 - **Filebeat (Wazuh module)** for structured log ingestion
 - **Windows 11 endpoint** with Wazuh Agent installed
 
-This setup mirrors common entry-level SOC environments focused on host-based telemetry.
+This architecture mirrors common entry-level SOC environments focused on host-based telemetry and centralized monitoring.
 
 ---
 
-## What is monitored
+## Monitoring Scope
 
-The lab prioritizes real endpoint telemetry (not synthetic demo data), including:
+The lab collects and validates real endpoint telemetry, including:
 
-- authentication activity (logon events, sudo/PAM where applicable),
-- privilege-related activity and suspicious access patterns,
-- host and process activity relevant to alert triage,
-- agent status and heartbeat monitoring.
+- Windows authentication activity (Event ID 4624 / 4625)
+- Failed logon detection and validation
+- Privilege-related activity
+- Agent heartbeat and connectivity monitoring
+- Host-based event logs (Security, System, Application)
 
 Alerts are enriched with:
 
-- **MITRE ATT&CK** technique mapping,
-- compliance metadata (e.g., PCI DSS, GDPR) when available in rule fields.
+- MITRE ATT&CK technique mapping
+- Compliance metadata (e.g., PCI DSS, GDPR) when available
 
 ---
 
-## SOC activities performed
+## Detection Validation Example
 
-This project demonstrates hands-on SOC Tier 1 activities, including:
+To validate ingestion and detection capabilities:
 
-- endpoint onboarding (agent deployment, enrollment, and connectivity checks),
-- validation of log ingestion and normalization (ensuring events reach the SIEM),
-- alert triage using contextual fields (host, user, rule metadata, timestamps),
-- investigation of authentication and privilege-related events,
-- troubleshooting ingestion and access issues (service status, permissions, authentication behavior),
-- verification of OpenSearch indices and data flow into dashboards.
+- A failed authentication attempt was simulated using:
+runas /user:fakeuser cmd
+- This generated a Windows Security Event ID 4625 (Logon Failure).
+- Wazuh successfully ingested the event and generated a Level 5 alert.
+- The alert was mapped to relevant MITRE ATT&CK techniques.
 
-The emphasis is on understanding **why** alerts are generated and **how** to validate them, not merely enabling services.
+Evidence is available in the `screenshots/` directory.
 
----
+This confirms:
 
-## Tools and technologies
-
-- SOC (Security Operations Center) concepts and workflows
-- SIEM (Security Information and Event Management): **Wazuh**
-- HIDS (Host-based Intrusion Detection System): **Wazuh Agent**
-- **OpenSearch** and **OpenSearch Dashboards**
-- **Filebeat** (Wazuh module)
-- **Linux** (Ubuntu on VirtualBox)
-- **Windows 11** endpoint
-- **Oracle VirtualBox**
+- Proper Windows Event Channel ingestion
+- Detection rule triggering
+- Field parsing and normalization
+- End-to-end data flow from endpoint to SIEM
 
 ---
 
-## Design decisions
+## SOC Activities Demonstrated
 
-Wazuh archives ingestion is handled through the official **Filebeat Wazuh module**, rather than custom ingestion inputs, to:
+This project includes hands-on execution of:
 
-- reduce configuration drift,
-- keep the deployment maintainable,
-- better reflect production-style SOC environments.
+- Endpoint onboarding (agent deployment and connectivity validation)
+- Log ingestion verification and troubleshooting
+- Alert triage using contextual metadata
+- Authentication event investigation
+- Detection validation through simulated adversarial behavior
+- Service and permission troubleshooting
+- Index and data flow validation in OpenSearch
 
----
-
-## Evidence (screenshots)
-
-Screenshots and artifacts are stored under:
-
-- `screenshots/` — dashboards, agent status, alert examples  
-- `configs/` — sanitized configuration excerpts  
-
-> **Note:** Screenshots do not include credentials or sensitive host details.
+The emphasis is on understanding *why* alerts are generated and how to validate them.
 
 ---
 
-## Project status
+## Tools & Technologies
 
-Core monitoring, ingestion validation, and alert triage workflows are implemented and tested.
-
-**Planned next improvements:**
-
-- a small set of custom detection rules,
-- documented triage write-ups (alert → analysis → conclusion),
-- additional endpoint scenarios for investigation practice.
+- **SIEM:** Wazuh
+- **HIDS:** Wazuh Agent
+- **Search & Indexing:** OpenSearch
+- **Log Shipping:** Filebeat (Wazuh module)
+- **Operating Systems:** Ubuntu (VirtualBox), Windows 11
+- **Virtualization:** Oracle VirtualBox
+- **Framework:** MITRE ATT&CK
 
 ---
 
-## Troubleshooting & validation
+## Design Decisions
 
-Real SOC work is not about perfect setups, but about identifying and resolving ingestion and visibility issues.
+The lab uses the official Wazuh Filebeat module for ingestion instead of custom pipelines in order to:
 
-During the build of this lab, multiple real-world problems were encountered and resolved, including:
+- Reduce configuration drift
+- Improve maintainability
+- Better reflect production-style SOC environments
 
-- endpoint log ingestion verification,
-- index visibility and data availability checks,
-- authentication and permission-related errors,
-- end-to-end data flow validation from source to SIEM.
+Configuration remains aligned with best practices for entry-level monitoring setups.
 
-The complete troubleshooting and validation process is documented here:
+---
 
-👉 [Log Ingestion & Validation Troubleshooting](troubleshooting/ingestion-validation.md)
+## Repository Structure
 
+screenshots/ → Evidence of agent connectivity and alert validation
+troubleshooting/ → Log ingestion and configuration troubleshooting documentation
+configs/ → Sanitized configuration excerpts (where applicable)
+
+Screenshots do not contain credentials or sensitive host information.
+
+---
+
+## Troubleshooting & Validation
+
+Real SOC work involves identifying and resolving ingestion and visibility issues.
+
+During this lab build, the following issues were encountered and resolved:
+
+- Windows Security log ingestion misconfiguration
+- Event channel parsing validation
+- Agent connectivity validation
+- Index visibility and data verification in OpenSearch
+- Configuration syntax errors in ossec.conf
+- End-to-end data flow validation
+
+The full troubleshooting documentation is available here:
+
+👉 **Log Ingestion & Validation Troubleshooting**
+
+---
+
+## Current Status
+
+✔ Core monitoring implemented  
+✔ Ingestion validation completed  
+✔ Failed authentication detection validated  
+✔ Alert triage workflow demonstrated  
+
+### Planned Improvements
+
+- Custom detection rules
+- Structured alert investigation write-ups (alert → analysis → conclusion)
+- Additional endpoint simulation scenarios
+- Expanded detection validation use cases
 
 ---
 
 ## Disclaimer
 
-This project is for educational and portfolio purposes only.  
-No production systems or real sensitive data are involved.
+This project is for educational and portfolio purposes only.
+
+No production systems or sensitive data are involved.
