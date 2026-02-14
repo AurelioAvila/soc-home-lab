@@ -28,8 +28,7 @@ This generated a Windows Security Event ID 4625 (Logon Failure).
 Wazuh successfully ingested the Security log and generated a Level 5 alert, 
 mapped to MITRE ATT&CK techniques:
 
-- T1078 – Valid Accounts
-- T1531 – Account Access Removal
+- T1110 (Brute Force) — based on repeated failed authentication attempts (Windows Event ID 4625)
 
 The alert confirms:
 - Windows Security log collection is working
