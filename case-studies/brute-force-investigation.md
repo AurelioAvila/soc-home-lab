@@ -40,3 +40,16 @@ No successful authentication observed.
 
 ## Lessons Learned
 Validating log ingestion is essential before trusting alert visibility.
+
+## Analyst Thinking Process
+
+During investigation, the main objective was to distinguish between normal user behavior and malicious authentication attempts.
+
+Key reasoning steps:
+
+- Multiple failures occurring in a short timeframe suggest automation rather than human typing errors.
+- Repeated attempts against authentication mechanisms are commonly associated with brute force techniques.
+- Absence of successful logons reduced immediate impact but required continued monitoring.
+
+Decision:
+The alert was classified as **medium severity**, requiring monitoring but not immediate escalation.
