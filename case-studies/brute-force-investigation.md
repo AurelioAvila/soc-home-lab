@@ -26,6 +26,16 @@ Key fields analyzed:
 3. Checked whether attempts targeted a single or multiple accounts.
 4. Validated timestamps and repetition pattern.
 
+## Investigation Flow
+
+The investigation followed a structured SOC Tier 1 workflow:
+
+1. Alert validation — confirmed event authenticity and log ingestion.
+2. Context gathering — reviewed affected accounts and event patterns.
+3. Pattern analysis — evaluated repetition and automation indicators.
+4. Impact assessment — verified absence of successful authentication.
+5. Classification — activity categorized as potential brute force attempt.
+
 ## Findings
 Repeated authentication failures suggested automated or scripted login attempts rather than normal user behavior.
 
