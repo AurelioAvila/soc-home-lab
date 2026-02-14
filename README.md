@@ -34,13 +34,6 @@ This lab simulates a realistic SOC-style monitoring architecture:
 This architecture mirrors common entry-level SOC environments focused on host-based telemetry and centralized monitoring.
 
 ---
-## Case Studies (SOC Investigation Examples)
-
-This repository includes practical SOC-style investigations demonstrating alert triage and analytical reasoning.
-
-- [Case Study 01 — Failed Logon Investigation (Event ID 4625)](case-studies/brute-force-investigation.md)
-
-Each case study documents the investigation workflow followed by a SOC Tier 1 analyst, including triage, analysis, and decision-making.
 
 ## Monitoring Scope
 
@@ -79,6 +72,16 @@ This confirms:
 - End-to-end data flow from endpoint to SIEM
 
 ---
+---
+
+## Case Studies (SOC Investigation Examples)
+
+This repository includes practical SOC-style investigations demonstrating alert triage and analytical reasoning.
+
+- [Case Study 01 — Failed Logon Investigation (Event ID 4625)](case-studies/brute-force-investigation.md)
+
+Each case study documents the investigation workflow followed by a SOC Tier 1 analyst, including triage, analysis, and decision-making.
+
 
 ## SOC Activities Demonstrated
 
