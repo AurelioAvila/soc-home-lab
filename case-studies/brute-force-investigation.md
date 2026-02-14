@@ -43,6 +43,13 @@ Repeated authentication failures suggested automated or scripted login attempts 
 Activity classified as **potential brute force attempt**.
 No successful authentication observed.
 
+## Scope Limitations
+
+This investigation was performed within a controlled lab environment.
+External threat intelligence correlation and network-level telemetry were not available.
+Assessment was therefore limited to host-based log analysis.
+
+
 ## Response / Recommendations
 - Monitor for Event ID 4624 (successful login).
 - Consider account lockout policy tuning.
