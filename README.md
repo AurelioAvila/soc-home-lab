@@ -4,6 +4,12 @@ A hands-on portfolio project focused on real SOC (Security Operations Center) Ti
 log ingestion, alert validation, triage, and investigation-driven decision making.
 
 ---
+## Analyst Role Simulation
+
+In this lab, I operated as a SOC Tier 1 analyst responsible for monitoring endpoint telemetry, validating alerts, and performing investigation-driven analysis.
+
+Activities were approached using real SOC workflows including alert triage, hypothesis validation, and evidence-based decision making.
+
 
 ## Project Objective
 
