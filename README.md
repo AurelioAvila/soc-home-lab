@@ -164,13 +164,11 @@ The full troubleshooting documentation is available here:
 ✔ Ingestion validation completed  
 ✔ Failed authentication detection validated  
 ✔ Alert triage workflow demonstrated  
+✔ Malware triage via hash documented in linked repository
 
-### Planned Improvements
+### Next Steps
 
-- Custom detection rules
-- Structured alert investigation write-ups (alert → analysis → conclusion)
-- Additional endpoint simulation scenarios
-- Expanded detection validation use cases
+- Expanding with additional threat scenarios and detection use cases
 
 ---
 
