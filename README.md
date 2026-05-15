@@ -4,12 +4,12 @@ A hands-on portfolio project focused on real SOC (Security Operations Center) Ti
 log ingestion, alert validation, triage, and investigation-driven decision making.
 
 ---
+
 ## Analyst Role Simulation
 
 In this lab, I operated as a SOC Tier 1 analyst responsible for monitoring endpoint telemetry, validating alerts, and performing investigation-driven analysis.
 
 Activities were approached using real SOC workflows including alert triage, hypothesis validation, and evidence-based decision making.
-
 
 ## Project Objective
 
@@ -58,17 +58,24 @@ Alerts are enriched with:
 
 ---
 
+## 🎯 MITRE ATT&CK Mapping
+
+| Technique | ID | Tactic |
+|-----------|-----|--------|
+| Brute Force: Password Guessing | [T1110.001](https://attack.mitre.org/techniques/T1110/001/) | Credential Access (TA0006) |
+| Valid Accounts | [T1078](https://attack.mitre.org/techniques/T1078/) | Defense Evasion / Persistence |
+| OS Credential Dumping | [T1003](https://attack.mitre.org/techniques/T1003/) | Credential Access (TA0006) |
+
+---
+
 ## Detection Validation Example
 
 To validate ingestion and detection capabilities:
 
-- A failed authentication attempt was simulated using:
-runas /user:fakeuser cmd
+- A failed authentication attempt was simulated using `runas /user:fakeuser cmd`
 - This generated a Windows Security Event ID 4625 (Logon Failure).
 - Wazuh successfully ingested the event and generated a Level 5 alert.
 - The alert was mapped to relevant MITRE ATT&CK techniques.
-
-Evidence is available in the `screenshots/` directory.
 
 This confirms:
 
@@ -77,7 +84,14 @@ This confirms:
 - Field parsing and normalization
 - End-to-end data flow from endpoint to SIEM
 
----
+### 📸 Evidence
+
+**Agent connected — Wazuh Dashboard:**
+![Agent active on Wazuh](screenshots/agent-active.png)
+
+**Failed login detection — Event ID 4625:**
+![Failed login detection](screenshots/failed-login-detection.png)
+
 ---
 
 ## Case Studies (SOC Investigation Examples)
@@ -87,7 +101,6 @@ This repository includes practical SOC-style investigations demonstrating alert 
 - [Case Study 01 — Failed Logon Investigation (Event ID 4625)](case-studies/brute-force-investigation.md)
 
 Each case study documents the investigation workflow followed by a SOC Tier 1 analyst, including triage, analysis, and decision-making.
-
 
 ## SOC Activities Demonstrated
 
@@ -131,9 +144,9 @@ Configuration remains aligned with best practices for entry-level monitoring set
 
 ## Repository Structure
 
-screenshots/ → Evidence of agent connectivity and alert validation
-troubleshooting/ → Log ingestion and configuration troubleshooting documentation
-configs/ → Sanitized configuration excerpts (where applicable)
+    screenshots/     → Evidence of agent connectivity and alert validation
+    troubleshooting/ → Log ingestion and configuration troubleshooting documentation
+    case-studies/    → SOC investigation write-ups
 
 Screenshots do not contain credentials or sensitive host information.
 
@@ -152,9 +165,7 @@ During this lab build, the following issues were encountered and resolved:
 - Configuration syntax errors in ossec.conf
 - End-to-end data flow validation
 
-The full troubleshooting documentation is available here:
-
-👉 **Log Ingestion & Validation Troubleshooting**
+The full troubleshooting documentation is available in the `troubleshooting/` directory.
 
 ---
 
@@ -164,16 +175,27 @@ The full troubleshooting documentation is available here:
 ✔ Ingestion validation completed  
 ✔ Failed authentication detection validated  
 ✔ Alert triage workflow demonstrated  
-✔ Malware triage via hash documented in linked repository
+✔ Case study documented (Event ID 4625 investigation)
 
 ### Next Steps
 
-- Expanding with additional threat scenarios and detection use cases
+- Additional endpoint simulation scenarios
+- Expanded detection rule coverage with custom Wazuh rules
+- Network-based telemetry integration
 
 ---
 
 ## Disclaimer
 
-This project is for educational and portfolio purposes only.
-
+This project is for educational and portfolio purposes only.  
 No production systems or sensitive data are involved.
+
+---
+
+## 🔗 Related Projects
+
+| Project | Description |
+|---------|-------------|
+| [splunk-brute-force-detection](https://github.com/AurelioAvila/splunk-brute-force-detection) | Brute force detection with Splunk SPL |
+| [malware-triage-hash](https://github.com/AurelioAvila/malware-triage-hash) | Python tool for malware triage via VirusTotal API |
+| [phishing-email-analysis](https://github.com/AurelioAvila/phishing-email-analysis) | Email header parser and IOC extractor |
