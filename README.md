@@ -1,5 +1,7 @@
 # SOC Home Lab — SIEM Monitoring, Detection Engineering & Alert Triage
 
+[![Buy me a coffee](https://img.shields.io/badge/%E2%98%95%20Buy%20me%20a%20coffee-one--off%2C%20no%20account-FF5500?style=flat-square&labelColor=1c1c1c)](https://buy.stripe.com/28E3cvdoZdzTdRiedY9Ve00)
+
 A hands-on portfolio project focused on real SOC (Security Operations Center) Tier 1 workflows:  
 log ingestion, alert validation, triage, and investigation-driven decision making.
 
